@@ -1,0 +1,50 @@
+# ThreatMap Infra — Python dependencies
+# Installed automatically by run.sh
+
+# ── Core CLI UI ────────────────────────────────────────────────────────────
+rich>=13.7.0
+questionary>=2.0.0
+prompt_toolkit>=3.0.0
+
+# ── Reporting ─────────────────────────────────────────────────────────────
+openpyxl>=3.1.0
+
+# ── HTTP evidence probing ──────────────────────────────────────────────────
+requests>=2.31.0
+urllib3>=2.0.0
+
+# ── Local SLM (recommended — no API key needed) ────────────────────────────
+#
+#   Provides AI triage using a locally-downloaded GGUF model.
+#   Run once to install, then run setup_slm.py to download the model.
+#
+#   CPU-only (safe for all VMs):
+#     pip install llama-cpp-python huggingface_hub
+#
+#   With NVIDIA GPU acceleration (optional, much faster):
+#     pip install llama-cpp-python[cuda] huggingface_hub
+#
+#   With Apple Silicon GPU (optional):
+#     pip install llama-cpp-python[metal] huggingface_hub
+#
+#   After installing, run:
+#     python3 setup_slm.py              # downloads Qwen2.5-1.5B (~1 GB, default)
+#     python3 setup_slm.py --phi3       # downloads Phi-3-mini (~2.2 GB, better)
+
+# ── Cloud LLM (optional alternative to local SLM) ─────────────────────────
+#
+#   Groq (free tier, fast — recommended if you want cloud):
+#     export THREATMAP_LLM_PROVIDER=groq
+#     export THREATMAP_LLM_API_KEY=gsk_...   (get free key: console.groq.com)
+#
+#   OpenAI:
+#     pip install openai>=1.0.0
+#     export THREATMAP_LLM_PROVIDER=openai
+#     export THREATMAP_LLM_API_KEY=sk-...
+#
+#   Google Gemini:
+#     export THREATMAP_LLM_PROVIDER=gemini
+#     export THREATMAP_LLM_API_KEY=AIza...
+
+# ── Optional: EyeWitness screenshots ──────────────────────────────────────
+# git clone https://github.com/FortyNorthSecurity/EyeWitness

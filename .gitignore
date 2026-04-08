@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+reports/
+*.db
+*.xlsx
+.env
+EyeWitness/
+.~lock.*
