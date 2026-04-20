@@ -1,129 +1,59 @@
-# ThreatMap-Infra
+# ThreatMap Infra
+Autonomous VAPT Orchestrator & Localized AI Triage Engine.
 
-Local-first vulnerability scanning & automated reporting system.
+ThreatMap Infra is a modular security assessment suite designed to automate the end-to-end VAPT pipeline. It orchestrates industry-standard reconnaissance tools and leverages local Small Language Models (SLMs) to perform automated triage, risk assessment, and professional reporting.
 
-ThreatMap-Infra is a lightweight cybersecurity tool designed to automate vulnerability scanning workflows and generate structured reports — all running locally, without relying on external SaaS platforms or exposing sensitive data.
-
----
-
-## Why ThreatMap-Infra?
-
-Most security tools today:
-- Depend on cloud platforms
-- Expose sensitive data
-- Require heavy configurations
-
-ThreatMap-Infra is built differently.
-
-It focuses on:
-- **Local execution**
-- **Automation of repetitive security tasks**
-- **Simple, extensible architecture**
-
----
-
-## Core Features
-
-- Automated vulnerability scanning pipeline  
-- Local-first execution (no data leakage)  
-- Structured report generation  
-- Modular and extensible architecture  
-- Lightweight and easy to deploy  
-
----
-
-## Architecture Overview
-
-Input → Scanning Engine → Data Processing → Report Generation → Output
-
-
-### Workflow:
-
-1. **Input Layer**
-   - Targets (IPs, domains, or assets)
-
-2. **Scanning Engine**
-   - Runs vulnerability scans
-   - Collects raw security data
-
-3. **Processing Layer**
-   - Filters and structures scan results
-   - Normalizes output
-
-4. **Reporting Engine**
-   - Generates readable reports
-   - Ready for analysis or sharing
-
----
-
-## Project Structure
-
-ThreatMap-Infra/
-│
-├── scanner/ # Scanning logic
-├── processing/ # Data processing pipeline
-├── reports/ # Report generation
-├── utils/ # Helper utilities
-├── config/ # Configuration files
-└── main.py # Entry point
-
-
----
+## Key Features
+- Multi-threaded reconnaissance and service discovery.
+- Local-first AI triage using GGUF-based LLMs (No data exfiltration).
+- Automated reporting engine (Professional XLSX/HTML outputs).
+- Adaptive evasion logic and randomized fingerprinting.
+- Modular architecture supporting Nmap, Nuclei, Nikto, and more.
 
 ## Installation
 
-Clone the repository:
-
-```bash
-git clone https://github.com/Nitin-sec/ThreatMap-Infra.git
+### Clone the repository
+gh repo clone Nitin-sec/ThreatMap-Infra
 cd ThreatMap-Infra
 
-Install dependencies:
+### Initial Setup
+The included launcher handles environment creation and dependency resolution.
+chmod +x run.sh
+./run.sh
 
-pip install -r requirements.txt
+### AI Model Initialization
+ThreatMap requires a local model for offline triage. Use the helper script to cache your preferred SLM.
+python3 setup_slm.py          # Default: Qwen2.5-1.5B (~1.0GB)
+python3 setup_slm.py --phi3   # Optional: Phi-3-mini (~2.2GB)
 
-Usage
+## Usage
+Execute the primary launcher to start the interactive Metasploit-style interface.
 
-Run the main script:
+./run.sh
 
-python main.py
+### Target Specification
+Provide a domain or IP range when prompted. The suite will ask for:
+- Authorization Confirmation (Legal requirement)
+- Scan Intensity (Balanced vs Aggressive)
+- Subdomain Discovery (Subfinder/Assetfinder integration)
 
-Configure targets and settings inside config files before execution.
+## Technical Architecture
 
-Example Use Cases
-Automating vulnerability scanning workflows
-Generating reports for security assessments
-Local testing without exposing infrastructure data
-Security research and experimentation
-Design Philosophy
+The tool executes through five distinct phases:
+1. Discovery: Subdomain enumeration and live-host validation.
+2. Scanning: Parallelized port discovery and service fingerprinting.
+3. Analysis: Rule-based and AI-enhanced vulnerability triage.
+4. Persistence: Data normalization into a local SQLite state.
+5. Synthesis: Generation of stakeholder-ready documentation.
 
-ThreatMap-Infra is built with a clear philosophy:
+## Requirements
+The engine assumes the following binaries are present in your system PATH:
+- nmap, nikto, gobuster, nuclei
+- subfinder, assetfinder, httpx
+- whatweb, wafw00f, sslscan
 
-Privacy-first → Everything runs locally
-Automation-first → Reduce manual effort
-Modularity → Easy to extend and modify
-Transparency → Understand every step of the pipeline
-Roadmap
-Improved scanning integrations
-Enhanced reporting formats
-Scalable pipeline support
-OSINT integration modules
-Real-time monitoring capabilities
-Contributing
+## Disclaimer
+ThreatMap Infra is developed for authorized security testing and research purposes only. Unauthorized use of this tool against infrastructure without explicit written consent is illegal. The developer assumes no liability for misuse.
 
-Contributions are welcome.
-
-If you want to improve this project:
-
-Fork the repo
-Create a feature branch
-Submit a pull request
-Disclaimer
-
-This tool is intended for:
-
-Educational purposes
-Security research
-Authorized testing only
-
-Do not use it on systems you do not own or have permission to test.
+## License
+MIT License.
