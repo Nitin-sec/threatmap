@@ -1,95 +1,129 @@
-# ThreatMap Infra
+# ThreatMap-Infra
 
-> Automated VAPT Scanner & External Attack Surface Mapping Tool
+Local-first vulnerability scanning & automated reporting system.
 
----
-
-##  Overview
-
-ThreatMap Infra is a security-focused tool designed to automate **Vulnerability Assessment and Penetration Testing (VAPT)** workflows.
-
-It performs reconnaissance, service discovery, vulnerability identification, and generates structured security reports — enabling faster and more consistent security assessments.
+ThreatMap-Infra is a lightweight cybersecurity tool designed to automate vulnerability scanning workflows and generate structured reports — all running locally, without relying on external SaaS platforms or exposing sensitive data.
 
 ---
 
-##  Key Features
+## Why ThreatMap-Infra?
 
-*  Automated target discovery & enumeration
-*  Network scanning and service identification
-*  Vulnerability detection using multiple techniques
-*  Structured report generation (VAPT-style)
-*  Intelligent triage and contextual insights
-*  Local processing (no external data dependency)
-*  Designed for authorized security testing only
+Most security tools today:
+- Depend on cloud platforms
+- Expose sensitive data
+- Require heavy configurations
 
----
+ThreatMap-Infra is built differently.
 
-## How It Works
-
-ThreatMap Infra follows a modular pipeline:
-
-Discovery → Scanning → Analysis → Triage → Reporting
-
-Each stage is designed to simulate real-world assessment workflows used in professional security engagements.
+It focuses on:
+- **Local execution**
+- **Automation of repetitive security tasks**
+- **Simple, extensible architecture**
 
 ---
 
-## Output
+## Core Features
 
-The tool generates structured reports including:
-
-* Executive summary
-* Risk distribution
-* Key findings
-* Detailed vulnerability analysis
-* Remediation recommendations
-
-Reports are designed to be **printable and client-ready**.
+- Automated vulnerability scanning pipeline  
+- Local-first execution (no data leakage)  
+- Structured report generation  
+- Modular and extensible architecture  
+- Lightweight and easy to deploy  
 
 ---
 
-## Tech Stack
+## Architecture Overview
 
-* Python
-* Security tools integration (Nmap, Nikto, etc.)
-* Local processing engine
-* Structured reporting system
+Input → Scanning Engine → Data Processing → Report Generation → Output
+
+
+### Workflow:
+
+1. **Input Layer**
+   - Targets (IPs, domains, or assets)
+
+2. **Scanning Engine**
+   - Runs vulnerability scans
+   - Collects raw security data
+
+3. **Processing Layer**
+   - Filters and structures scan results
+   - Normalizes output
+
+4. **Reporting Engine**
+   - Generates readable reports
+   - Ready for analysis or sharing
 
 ---
 
-##  Installation
+## Project Structure
+
+ThreatMap-Infra/
+│
+├── scanner/ # Scanning logic
+├── processing/ # Data processing pipeline
+├── reports/ # Report generation
+├── utils/ # Helper utilities
+├── config/ # Configuration files
+└── main.py # Entry point
+
+
+---
+
+## Installation
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/Nitin-sec/ThreatMap-Infra.git
 cd ThreatMap-Infra
 
-python3 -m venv venv
-source venv/bin/activate
+Install dependencies:
 
 pip install -r requirements.txt
-```
 
----
+Usage
 
-## ▶ Usage
+Run the main script:
 
-```bash
-./run.sh
-```
+python main.py
 
-Follow the prompts to provide a target and output location.
+Configure targets and settings inside config files before execution.
 
----
+Example Use Cases
+Automating vulnerability scanning workflows
+Generating reports for security assessments
+Local testing without exposing infrastructure data
+Security research and experimentation
+Design Philosophy
 
-## ⚠️ Disclaimer
+ThreatMap-Infra is built with a clear philosophy:
 
-This tool is intended for **authorized security testing only**.
+Privacy-first → Everything runs locally
+Automation-first → Reduce manual effort
+Modularity → Easy to extend and modify
+Transparency → Understand every step of the pipeline
+Roadmap
+Improved scanning integrations
+Enhanced reporting formats
+Scalable pipeline support
+OSINT integration modules
+Real-time monitoring capabilities
+Contributing
 
-Unauthorized scanning of systems is illegal and strictly prohibited.
-The author is not responsible for misuse of this tool.
+Contributions are welcome.
 
----
+If you want to improve this project:
 
-## 📜 License
+Fork the repo
+Create a feature branch
+Submit a pull request
+Disclaimer
 
-This project is licensed under the MIT License.
+This tool is intended for:
+
+Educational purposes
+Security research
+Authorized testing only
+
+Do not use it on systems you do not own or have permission to test.
