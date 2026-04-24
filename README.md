@@ -169,8 +169,3 @@ Give it a star ⭐
 It helps a lot.
 
 ---
-
-##  Author
-
-Built by Nitin-sec
-Focused on cybersecurity + AI + automation
