@@ -43,7 +43,6 @@ class Finding:
     module:       str
     risk:         str
     remediation:  str
-    confidence:   str
     ai_enhanced:  bool = False
     ai_summary:   str  = ""
 
@@ -79,13 +78,6 @@ def _slm_available() -> bool:
     return any(slm_dir.glob("*.gguf"))
 
 
-def _confidence_from_cvss(cvss: float) -> str:
-    if cvss >= 7.0:
-        return "High"
-    if cvss >= 4.0:
-        return "Medium"
-    return "Low"
-
 
 # ── AI explanation (per finding) ─────────────────────────────────────────────
 
@@ -108,13 +100,12 @@ def _explain_finding(finding: Finding, use_slm: bool) -> dict[str, str]:
         "Do not repeat remediation text across different findings.\n"
         "Do not use generic or templated wording.\n"
         "Provide practical advice that can be actioned by a development or operations team.\n\n"
-        "Return JSON with exactly these keys: explanation, risk, remediation, confidence.\n"
+        "Return JSON with exactly these keys: explanation, risk, remediation.\n"
         "Example format:\n"
         "{\n"
         '  "explanation": "1-2 sentences: what was found and why it matters.",\n'
         '  "risk": "Specific business risk if the issue is exploited.",\n'
-        '  "remediation": "Concrete, service-specific fix steps.",\n'
-        '  "confidence": "High / Medium / Low"\n'
+        '  "remediation": "Concrete, service-specific fix steps."\n'
         "}\n"
     )
 
@@ -172,7 +163,6 @@ def _parse_slm_explanation(raw: str) -> dict[str, str]:
             "explanation": str(payload.get("explanation","")).strip(),
             "risk": str(payload.get("risk","")).strip(),
             "remediation": str(payload.get("remediation","")).strip(),
-            "confidence": str(payload.get("confidence","")).strip(),
         }
     except (json.JSONDecodeError, ValueError):
         return {}
@@ -289,7 +279,6 @@ class AIReporter:
                 module      = d.get("impacted_module","Network Service"),
                 risk        = d.get("risk_impact","") or d.get("business_impact",""),
                 remediation = d.get("remediation","") or d.get("risk_summary",""),
-                confidence  = _confidence_from_cvss(float(d.get("cvss_score",0.0))),
             ))
 
         report = ScanReport(
@@ -322,7 +311,6 @@ class AIReporter:
                 finding.ai_summary = parsed.get("explanation") or _template_explanation(finding)
                 finding.risk       = parsed.get("risk") or finding.risk
                 finding.remediation= parsed.get("remediation") or finding.remediation
-                finding.confidence= parsed.get("confidence") or finding.confidence
                 finding.ai_enhanced = True
                 continue
 
@@ -358,7 +346,6 @@ class AIReporter:
                     "module":      f.module,
                     "risk":        f.risk,
                     "remediation": f.remediation,
-                    "confidence":  f.confidence,
                     "ai_enhanced": f.ai_enhanced,
                     "explanation": f.ai_summary,
                 }
@@ -411,7 +398,6 @@ class AIReporter:
                 f"     Module     : {f.module}",
                 f"     Risk       : {f.risk or 'See remediation below.'}",
                 f"     Remediation: {f.remediation}",
-                f"     Confidence : {f.confidence}",
             ]
             if f.ai_summary:
                 lines += [
@@ -510,7 +496,6 @@ class AIReporter:
                 f'<td style="padding:10px;font-size:11px;color:#777;text-align:center">{esc(f.module)}</td>'
                 f'<td style="padding:10px">{badge(f.severity)}'
                 f'<br><span style="font-size:10px;color:#999">CVSS {f.cvss}</span></td>'
-                f'<td style="padding:10px;font-size:11px;color:#555">{esc(f.confidence)}</td>'
                 f'<td style="padding:10px;font-size:11px">{esc(f.remediation)}</td>'
                 f'</tr>'
                 + explanation_row
@@ -576,7 +561,6 @@ tr{{page-break-inside:avoid}}}}
   <th style="width:160px">Detail / Risk</th>
   <th style="width:110px">Module</th>
   <th style="width:95px">Severity</th>
-  <th style="width:85px">Confidence</th>
   <th>Remediation</th>
 </tr></thead>
 <tbody>{rows_html}</tbody>

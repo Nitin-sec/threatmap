@@ -25,11 +25,11 @@ PORT_SVC = {"21":"ftp","22":"ssh","23":"telnet","25":"smtp","53":"dns","80":"htt
 PORT_CVSS = {"21":7.5,"22":5.3,"23":9.1,"25":5.8,"53":6.5,"80":5.0,"110":5.8,"111":7.2,"143":5.8,"443":3.7,"445":9.8,"465":5.8,"873":7.5,"993":5.8,"995":5.8,"1433":8.1,"1521":8.5,"2049":7.5,"3306":7.2,"3389":8.8,"5432":7.2,"5900":8.0,"6379":9.8,"8080":5.0,"9100":7.5,"9200":9.8,"11211":8.0,"27017":9.8}
 
 CVSS_BANDS = [
-    ((9.0,10.0),("Critical",1,"Exploit-ready or KEV. Patch within 24h.")),
-    ((7.0, 8.9),("High",    2,"Patch within 7 days.")),
-    ((4.0, 6.9),("Medium",  3,"Fix within 30 days.")),
-    ((0.1, 3.9),("Low",     4,"Quarterly review.")),
-    ((0.0, 0.0),("Info",    5,"Informational.")),
+    ((9.0,10.0),("Critical",1)),
+    ((7.0, 8.9),("High",    2)),
+    ((4.0, 6.9),("Medium",  3)),
+    ((0.1, 3.9),("Low",     4)),
+    ((0.0, 0.0),("Info",    5)),
 ]
 
 RULE_OBS = {
@@ -292,7 +292,7 @@ class TriageEngine:
         port = str(finding.get("port",""))
         svc  = self._normalize_service(port, finding.get("service","").lower())
         cvss = float(finding.get("cvss_score") or PORT_CVSS.get(port, 0.0))
-        sev,pri,sla = self._band(cvss)
+        sev,pri = self._band(cvss)
         obs,mod = RULE_OBS.get(svc, DEFAULT_OBS)
         ver = finding.get("version","")
         if ver:
@@ -316,7 +316,7 @@ class TriageEngine:
         for (lo,hi),vals in CVSS_BANDS:
             if lo <= cvss <= hi:
                 return vals
-        return ("Info",5,"Informational.")
+        return ("Info",5)
 
     def _normalize_service(self, port: str, svc: str) -> str:
         if port == "8080":
@@ -362,8 +362,7 @@ class TriageEngine:
             '  "impacted_module": "Remote Access / Web Server / Database / Mail Server / DNS Infrastructure / Application Layer / File Sharing / Network Service / Cache Layer",\n'
             '  "risk_impact": "Specific business risk if exploited.",\n'
             '  "recommendation": "Concrete remediation steps with service details.",\n'
-            '  "explanation": "Short unique explanation of the issue.",\n'
-            '  "confidence": "High / Medium / Low"\n'
+            '  "explanation": "Short unique explanation of the issue."\n'
             "}"
         )
 

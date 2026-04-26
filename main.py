@@ -48,13 +48,6 @@ log     = get_logger("main")
 console = Console()
 
 SEV_COLOR = {"Critical":"red","High":"orange1","Medium":"yellow","Low":"green","Info":"bright_blue"}
-SEV_SLA   = {
-    "Critical": "Patch within 24h",
-    "High":     "Patch within 7 days",
-    "Medium":   "Fix within 30 days",
-    "Low":      "Quarterly review",
-    "Info":     "Informational",
-}
 SEV_ORDER = [s.title() for s in SEVERITY_ORDER]
 
 Q = questionary.Style([

@@ -152,7 +152,7 @@ def export_excel(json_path: str, output_dir: str) -> Optional[str]:
 
     # Sheet 2: Findings
     ws = workbook.create_sheet("Findings")
-    headers = ["No", "Finding", "Host", "Details", "Severity", "Confidence", "Remediation"]
+    headers = ["No", "Finding", "Host", "Details", "Severity", "Remediation"]
     ws.append(headers)
     for c in ws[1]:
         c.font = Font(bold=True)
@@ -173,7 +173,6 @@ def export_excel(json_path: str, output_dir: str) -> Optional[str]:
             f"{finding.get('host', '')}:{finding.get('port', '')}",
             finding.get("detail", ""),
             finding.get("severity", ""),
-            finding.get("confidence", "Medium"),
             finding.get("remediation", "")
         ]
         ws.append(row)
