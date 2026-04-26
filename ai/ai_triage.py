@@ -346,7 +346,7 @@ class TriageEngine:
         title  = ctx.get("title","")  or "unknown"
         miss   = ", ".join(ctx.get("missing",[])) or "none"
         return (
-            "You are a senior VAPT consultant writing detailed professional reports writing a professional pentest report.\n"
+            "You are a senior security consultant writing detailed professional vulnerability assessment reports.\n"
             "Rule engine found: %s (CVSS %.1f)\n\n" % (base["severity"], base["cvss_score"]) +
             "FINDING:\n  Host: %s\n  Port: %s/TCP\n  Protocol: TCP\n  Service: %s\n  Observed issue: %s\n  Detail: %s\n\n" % (finding["host"],finding["port"],finding["service"], observed, detail) +
             "HOST CONTEXT:\n  Other ports: %s\n  Technologies: %s\n" % (ports,tech) +

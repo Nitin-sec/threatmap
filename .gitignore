@@ -1,9 +1,22 @@
-.venv/
+# Python
 __pycache__/
 *.pyc
-*.db
-reports/
-__pycache__/
+
+# Virtual env
 venv/
+.venv/
+
+# Runtime data
 scans/
 *.log
+*.tmp
+
+# Databases
+*.db
+*.sqlite
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

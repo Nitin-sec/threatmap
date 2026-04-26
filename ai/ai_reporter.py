@@ -549,7 +549,7 @@ tr{{page-break-inside:avoid}}}}
 </style></head><body>
 <div class="cover">
   <div class="brand">THREATMAP</div>
-  <div class="brand-sub">INFRA — Vulnerability Assessment &amp; Penetration Testing Report</div>
+  <div class="brand-sub">INFRA — Vulnerability Assessment &amp; Security Analysis Report</div>
   <div class="meta">
     <span class="ml">Target</span>       <span class="mv">{esc(report.target)}</span>
     <span class="ml">Report Date</span>  <span class="mv">{report.generated_at[:10]}</span>
