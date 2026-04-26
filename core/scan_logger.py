@@ -101,13 +101,13 @@ def get_logger(name: str) -> logging.Logger:
 
 def print_step_ok(msg: str) -> None:
     """Print a [+] success line. Used for major milestones."""
-    print(f"  \033[32m[+]\033[0m  {msg}")
+    print(msg)
 
 def print_step_warn(msg: str) -> None:
-    print(f"  \033[33m[!]\033[0m  {msg}")
+    print(msg)
 
 def print_step_err(msg: str) -> None:
-    print(f"  \033[31m[-]\033[0m  {msg}")
+    print(msg)
 
 def print_step_info(msg: str) -> None:
-    print(f"  \033[34m[*]\033[0m  {msg}")
+    print(msg)
