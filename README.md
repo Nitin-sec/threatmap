@@ -18,9 +18,9 @@ ThreatMap automates: discovery, evidence collection, local SLM analysis, and rep
 
 ## Screenshots
 
-| CLI run | HTML report | Excel export |
-|---|---|---|
-| ![CLI run](https://via.placeholder.com/320x180?text=CLI+run) | ![HTML report](https://via.placeholder.com/320x180?text=HTML+report) | ![Excel output](https://via.placeholder.com/320x180?text=Excel+output) |
+| CLI run | HTML report | 
+|---|---|
+| assets/screenshots/cli.png | assets/screenshots/report.png
 
 ---
 
