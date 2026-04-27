@@ -76,7 +76,7 @@ def _banner() -> None:
     console.print()
     info = Table.grid(padding=(0,4))
     info.add_column(min_width=12); info.add_column()
-    info.add_row("[dim]Version[/dim]",   "[white]1.0[/white]  [dim]·  VAPT + EASM Scanner[/dim]")
+    info.add_row("[dim]Version[/dim]",   "[white]1.0[/white]  [dim]·  Security Analysis + EASM Scanner[/dim]")
     info.add_row("[dim]Platform[/dim]",  "[white]Kali Linux[/white]  [dim]·  Authorized use only[/dim]")
     info.add_row("[dim]Storage[/dim]",   "[white]100% Local[/white]  [dim]·  No data leaves your machine[/dim]")
     info.add_row("[dim]Local Analysis (SLM)[/dim]", "[white]Built-in[/white]")
@@ -231,7 +231,7 @@ def main() -> str:
 
         db.complete_scan(scan_id)
 
-        task_rep = progress.add_task("Generating report files", total=1)
+        task_rep = progress.add_task("Generating report", total=1)
         report_paths = generate_all_reports(db=db, scan_id=scan_id, output_dir=save_dir)
         progress.advance(task_rep)
 
